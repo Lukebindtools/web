@@ -354,7 +354,6 @@
     </div>
 
     <script>
-        // Automatic Detailed Phone/Device Detection
         function detectDeviceDetails() {
             let ua = navigator.userAgent;
             let osName = "UNKNOWN OS";
@@ -373,7 +372,7 @@
                 osName = "LINUX PC";
             }
 
-            // Specific Phone/Brand Detection from User Agent
+            // Brand / Model Detection
             if (/samsung/i.test(ua)) {
                 phoneModel = "SAMSUNG";
             } else if (/xiaomi|redmi|poco/i.test(ua)) {
@@ -392,11 +391,16 @@
                 phoneModel = "IPAD";
             } else if (/oneplus/i.test(ua)) {
                 phoneModel = "ONEPLUS";
+            } else if (/infinix/i.test(ua)) {
+                phoneModel = "INFINIX";
+            } else if (/tecno/i.test(ua)) {
+                phoneModel = "TECNO";
             } else {
-                if (/windows|macintosh|linux/i.test(ua)) {
-                    phoneModel = "DESKTOP / LAPTOP";
+                // Fallback kung walang brand na nakita pero mobile device gamit
+                if (/mobi|android|iphone|ipad|ipod/i.test(ua)) {
+                    phoneModel = "ANDROID MOBILE";
                 } else {
-                    phoneModel = "MOBILE PHONE";
+                    phoneModel = "DESKTOP / LAPTOP";
                 }
             }
 
