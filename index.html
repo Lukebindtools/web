@@ -35,6 +35,7 @@
             user-select: none;
         }
 
+        /* Intro Password Lock Overlay */
         #login-overlay {
             position: fixed;
             top: 0;
@@ -58,7 +59,7 @@
             padding: 24px;
             border: 1px solid #444;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-            text-align: left;
+            text-align: center;
         }
 
         .login-logo {
@@ -72,22 +73,10 @@
             display: block;
         }
 
-        .input-group {
-            margin-bottom: 14px;
-        }
-
-        .input-label {
-            font-size: 12px;
-            font-weight: bold;
-            color: #cccccc;
-            margin-bottom: 6px;
-            display: block;
-            letter-spacing: 0.5px;
-        }
-
         .login-input {
             width: 100%;
             padding: 12px;
+            margin: 15px 0;
             background-color: #000000;
             border: 1px solid #555;
             border-radius: 8px;
@@ -95,6 +84,7 @@
             font-size: 14px;
             box-sizing: border-box;
             outline: none;
+            text-align: center;
             font-family: inherit;
         }
 
@@ -115,42 +105,21 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 6px;
             font-family: inherit;
         }
 
-        .login-btn:hover {
-            background: #e0e0e0;
-        }
-
         .error-msg {
-            color: #ff6666;
-            background-color: #220000;
-            border: 1px solid #662222;
-            padding: 8px;
+            color: #cccccc;
+            background-color: #222;
+            border: 1px solid #555;
+            padding: 6px;
             font-size: 11px;
-            margin-top: 12px;
+            margin-top: 10px;
             display: none;
             border-radius: 4px;
-            text-align: center;
         }
 
-        /* Account details result box para sa loob ng login screen */
-        .account-details-box {
-            margin-top: 16px;
-            padding: 12px;
-            background-color: #000000;
-            border: 1px solid #333;
-            border-radius: 8px;
-            font-size: 11px;
-            color: #cccccc;
-            display: none;
-        }
-
-        .account-details-box div {
-            margin-bottom: 4px;
-        }
-
+        /* Main App Styles */
         .app-header {
             text-align: center;
             margin-bottom: 16px;
@@ -204,24 +173,78 @@
             border-radius: 12px;
         }
 
-        .terminal-box {
+        /* In-App Login Form Card (Pumalit sa Third-Party Bindings) */
+        .inapp-login-card {
+            background-color: #111111;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .input-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #cccccc;
+            margin-bottom: 4px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .inapp-input {
+            width: 100%;
+            padding: 10px;
+            background-color: #000000;
+            border: 1px solid #555;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 13px;
+            box-sizing: border-box;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .inapp-input:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+        }
+
+        .inapp-btn {
+            width: 100%;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: inherit;
+            margin-top: 4px;
+        }
+
+        /* Account Status Result Box */
+        .account-details-box {
+            margin-top: 12px;
+            padding: 10px;
             background-color: #000000;
             border: 1px solid #333;
-            border-radius: 10px;
-            padding: 10px 12px;
-            margin-bottom: 14px;
+            border-radius: 6px;
             font-size: 11px;
             color: #cccccc;
+            display: none;
+            text-align: left;
         }
 
-        .terminal-line {
-            display: flex;
-            justify-content: space-between;
+        .account-details-box div {
             margin-bottom: 3px;
-        }
-
-        .terminal-line:last-child {
-            margin-bottom: 0;
         }
 
         .countdown-card {
@@ -256,68 +279,6 @@
             padding: 0 15px;
         }
 
-        .section-label {
-            font-size: 10px;
-            color: #888888;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .bindings-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .binding-item {
-            background-color: #111111;
-            border: 1px solid #262626;
-            border-radius: 10px;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .binding-name {
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .binding-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-indicator.available {
-            color: #777777;
-            font-size: 11px;
-        }
-
-        .status-indicator.connected {
-            color: #ffffff;
-            background-color: #222;
-            border: 1px solid #555;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 10px;
-        }
-
-        .action-btn {
-            background: #ffffff;
-            color: #000000;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 11px;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
         .remove-device-btn {
             width: 100%;
             background-color: #111111;
@@ -343,39 +304,19 @@
 </head>
 <body>
 
+    <!-- Intro Password Lock (HINDI INALIS) -->
     <div id="login-overlay">
         <div class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
-            <div style="text-align: center; margin-bottom: 15px;">
-                <div class="app-title" style="font-size: 16px;">SECURITY LOCK</div>
-                <div class="app-subtitle" style="margin-bottom: 0;">Enter account credentials</div>
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">Email or username</label>
-                <input type="text" id="username-box" class="login-input" placeholder="Enter email or username">
-            </div>
-
-            <div class="input-group">
-                <label class="input-label">Password</label>
-                <input type="password" id="password-box" class="login-input" placeholder="••••••••••••">
-            </div>
-
-            <button onclick="checkPassword()" class="login-btn">Login</button>
-            <div id="error-message" class="error-msg">Invalid credentials or password!</div>
-
-            <!-- Account details box na lilitaw kapag nag-login -->
-            <div id="account-info" class="account-details-box">
-                <div><strong>Status:</strong> Active</div>
-                <div><strong>Account ID:</strong> 55443253</div>
-                <div><strong>Zone ID:</strong> 3071</div>
-                <div><strong>Banned:</strong> No</div>
-                <div><strong>Registered:</strong> 2017-05-09 08:47:16</div>
-                <div><strong>Origin Country:</strong> ph</div>
-            </div>
+            <div class="app-title">SECURITY LOCK</div>
+            <div class="app-subtitle">Enter access password</div>
+            <input type="password" id="intro-password-box" class="login-input" placeholder="••••••••••••">
+            <button onclick="checkIntroPassword()" class="login-btn">Unlock</button>
+            <div id="error-message" class="error-msg">[!] ACCESS DENIED</div>
         </div>
     </div>
 
+    <!-- Main Content (Nawala na ang third-party bindings, pinalitan ng login system) -->
     <div id="main-content" class="phone-frame blurred">
         <div class="app-header">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="app-logo-img">
@@ -388,12 +329,6 @@
             </div>
         </div>
 
-        <div class="terminal-box">
-            <div class="terminal-line"><span>SYS_TARGET:</span> <span style="color:#fff;">LUKE_HOST</span></div>
-            <div class="terminal-line"><span>ENCRYPTION:</span> <span style="color:#fff;">AES-256-GCM</span></div>
-            <div class="terminal-line"><span>HANDSHAKE:</span> <span style="color:#fff;">ESTABLISHED</span></div>
-        </div>
-
         <div class="countdown-card">
             <div class="countdown-title">SESSION EXPIRES IN</div>
             <div id="countdown-timer" class="countdown-timer-display">02 : 59 : 57</div>
@@ -404,36 +339,28 @@
             </div>
         </div>
 
-        <div class="section-label">THIRD-PARTY BINDINGS</div>
+        <!-- YUNG BAGONG LOGIN SYSTEM SA LOOB (Pumalit sa Google/FB/TikTok/Apple) -->
+        <div class="inapp-login-card">
+            <div class="input-group">
+                <label class="input-label">Email or username</label>
+                <input type="text" id="user-email-box" class="inapp-input" placeholder="Enter email or username">
+            </div>
 
-        <div class="bindings-list">
-            <div class="binding-item">
-                <span class="binding-name">Google</span>
-                <div class="binding-right">
-                    <span id="google-status" class="status-indicator available">Available</span>
-                    <button id="google-connect-btn" class="action-btn">Connect</button>
-                </div>
+            <div class="input-group">
+                <label class="input-label">Password</label>
+                <input type="password" id="user-pass-box" class="inapp-input" placeholder="••••••••••••">
             </div>
-            <div class="binding-item">
-                <span class="binding-name">Facebook</span>
-                <div class="binding-right">
-                    <span id="facebook-status" class="status-indicator available">Available</span>
-                    <button id="facebook-connect-btn" class="action-btn">Connect</button>
-                </div>
-            </div>
-            <div class="binding-item">
-                <span class="binding-name">TikTok</span>
-                <div class="binding-right">
-                    <span id="tiktok-status" class="status-indicator available">Available</span>
-                    <button id="tiktok-connect-btn" class="action-btn">Connect</button>
-                </div>
-            </div>
-            <div class="binding-item">
-                <span class="binding-name">Apple</span>
-                <div class="binding-right">
-                    <span id="apple-status" class="status-indicator available">Available</span>
-                    <button id="apple-connect-btn" class="action-btn">Connect</button>
-                </div>
+
+            <button onclick="performAppLogin()" class="inapp-btn">Login</button>
+
+            <!-- Account Details Status Box -->
+            <div id="account-status-box" class="account-details-box">
+                <div><strong>Status:</strong> Active</div>
+                <div><strong>Account ID:</strong> 55443253</div>
+                <div><strong>Zone ID:</strong> 3071</div>
+                <div><strong>Banned:</strong> No</div>
+                <div><strong>Registered:</strong> 2017-05-09 08:47:16</div>
+                <div><strong>Origin Country:</strong> ph</div>
             </div>
         </div>
 
@@ -445,32 +372,38 @@
     </div>
 
     <script>
-        function checkPassword() {
-            let passVal = document.getElementById('password-box').value;
+        // Intro Password Check
+        function checkIntroPassword() {
+            let inputVal = document.getElementById('intro-password-box').value;
             let errorMsg = document.getElementById('error-message');
-            let accountInfo = document.getElementById('account-info');
             
-            if (passVal === "julypogi12345") {
-                errorMsg.style.display = 'none';
-                accountInfo.style.display = 'block';
-                // Mag-aantay ng konting segundo bago mawala ang overlay at mapuntahan ang main app
-                setTimeout(() => {
-                    document.getElementById('login-overlay').style.display = 'none';
-                    document.getElementById('main-content').classList.remove('blurred');
-                }, 1500);
+            if (inputVal === "julypogi12345") {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-content').classList.remove('blurred');
             } else {
                 errorMsg.style.display = 'block';
-                accountInfo.style.display = 'none';
             }
         }
 
-        document.getElementById('password-box').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') { checkPassword(); }
+        document.getElementById('intro-password-box').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') { checkIntroPassword(); }
         });
 
-        let countdownTimer = 10797;
-        let bindings = { google: false, facebook: false, tiktok: false, apple: false };
+        // In-App Login Button Action para lumabas ang Status details
+        function performAppLogin() {
+            let emailVal = document.getElementById('user-email-box').value;
+            let passVal = document.getElementById('user-pass-box').value;
+            let statusBox = document.getElementById('account-status-box');
 
+            if(emailVal.trim() !== "" && passVal.trim() !== "") {
+                statusBox.style.display = 'block';
+            } else {
+                alert("Please fill in both fields!");
+            }
+        }
+
+        // Countdown Timer
+        let countdownTimer = 10797;
         setInterval(() => {
             let h = Math.floor(countdownTimer / 3600);
             let m = Math.floor((countdownTimer % 3600) / 60);
@@ -480,20 +413,11 @@
             if (countdownTimer > 0) countdownTimer--;
         }, 1000);
 
-        function toggleService(service) {
-            let statusEl = document.getElementById(`${service}-status`);
-            bindings[service] = !bindings[service];
-            statusEl.innerText = bindings[service] ? 'CONNECTED' : 'Available';
-            statusEl.className = bindings[service] ? 'status-indicator connected' : 'status-indicator available';
-        }
-
-        ['google', 'facebook', 'tiktok', 'apple'].forEach(s => {
-            document.getElementById(`${s}-connect-btn`).addEventListener('click', () => toggleService(s));
-        });
-
         document.getElementById('remove-device-btn').addEventListener('click', () => {
             countdownTimer = 10800;
-            ['google', 'facebook', 'tiktok', 'apple'].forEach(s => { if(bindings[s]) toggleService(s); });
+            document.getElementById('user-email-box').value = "";
+            document.getElementById('user-pass-box').value = "";
+            document.getElementById('account-status-box').style.display = 'none';
         });
     </script>
 </body>
