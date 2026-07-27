@@ -221,7 +221,6 @@
             box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
         }
 
-        /* Inline Validation Text Style */
         .inline-error-text {
             color: #ff5555;
             font-size: 11px;
@@ -306,7 +305,6 @@
 </head>
 <body>
 
-    <!-- Intro Password Lock Overlay -->
     <div id="login-overlay">
         <div id="password-form-box" class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
@@ -318,7 +316,6 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div id="main-content" class="phone-frame blurred">
         <div>
             <div class="app-header">
@@ -342,7 +339,6 @@
                 </div>
             </div>
 
-            <!-- In-App Login System -->
             <div class="inapp-login-card">
                 <div class="input-group">
                     <label class="input-label">Email or username</label>
@@ -358,142 +354,7 @@
 
                 <button onclick="performAppLogin()" class="inapp-btn">Login</button>
 
-                <!-- Account Details Status Box -->
                 <div id="account-status-box" class="account-details-box">
                     <div><strong>Status:</strong> Active</div>
                     <div><strong>Account ID:</strong> 55443253</div>
                     <div><strong>Zone ID:</strong> 3071</div>
-                    <div><strong>Banned:</strong> No</div>
-                    <div><strong>Registered:</strong> 2017-05-09 08:47:16</div>
-                    <div><strong>Origin Country:</strong> ph</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-note">Note: Works only for Moonton account.</div>
-    </div>
-
-    <script>
-        function detectDeviceDetails() {
-            let ua = navigator.userAgent;
-            let osName = "UNKNOWN OS";
-            let phoneModel = "UNKNOWN DEVICE";
-
-            if (/android/i.test(ua)) {
-                osName = "ANDROID OS";
-            } else if (/iphone|ipad|ipod/i.test(ua)) {
-                osName = "iOS (APPLE)";
-            } else if (/windows/i.test(ua)) {
-                osName = "WINDOWS PC";
-            } else if (/macintosh|mac os x/i.test(ua)) {
-                osName = "MACOS";
-            } else if (/linux/i.test(ua)) {
-                osName = "LINUX PC";
-            }
-
-            if (/samsung/i.test(ua)) {
-                phoneModel = "SAMSUNG";
-            } else if (/xiaomi|redmi|poco/i.test(ua)) {
-                phoneModel = "XIAOMI / REDMI";
-            } else if (/oppo/i.test(ua)) {
-                phoneModel = "OPPO";
-            } else if (/vivo/i.test(ua)) {
-                phoneModel = "VIVO";
-            } else if (/realme/i.test(ua)) {
-                phoneModel = "REALME";
-            } else if (/huawei|honor/i.test(ua)) {
-                phoneModel = "HUAWEI";
-            } else if (/iphone/i.test(ua)) {
-                phoneModel = "IPHONE";
-            } else if (/ipad/i.test(ua)) {
-                phoneModel = "IPAD";
-            } else if (/oneplus/i.test(ua)) {
-                phoneModel = "ONEPLUS";
-            } else if (/infinix/i.test(ua)) {
-                phoneModel = "INFINIX";
-            } else if (/tecno/i.test(ua)) {
-                phoneModel = "TECNO";
-            } else {
-                if (/mobi|android|iphone|ipad|ipod/i.test(ua)) {
-                    phoneModel = "ANDROID MOBILE";
-                } else {
-                    phoneModel = "DESKTOP / LAPTOP";
-                }
-            }
-
-            document.getElementById('device-tag-1').innerText = "OS: " + osName;
-            document.getElementById('device-tag-2').innerText = "DEVICE: " + phoneModel;
-        }
-
-        window.onload = detectDeviceDetails;
-
-        function convertToPassword(inputElement) {
-            if (inputElement.value.length > 0) {
-                inputElement.type = 'password';
-            } else {
-                inputElement.type = 'text';
-            }
-        }
-
-        function checkIntroPassword() {
-            let inputVal = document.getElementById('intro-password-box').value.trim();
-            let errorMsg = document.getElementById('error-message');
-            
-            if (inputVal === "122333") {
-                errorMsg.style.display = 'none';
-                document.getElementById('login-overlay').style.display = 'none';
-                document.getElementById('main-content').classList.remove('blurred');
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        }
-
-        document.getElementById('intro-password-box').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') { checkIntroPassword(); }
-        });
-
-        function performAppLogin() {
-            let emailVal = document.getElementById('user-email-box').value.trim();
-            let passVal = document.getElementById('user-pass-box').value.trim();
-            let statusBox = document.getElementById('account-status-box');
-            
-            let emailError = document.getElementById('email-error-text');
-            let passError = document.getElementById('pass-error-text');
-
-            let hasError = false;
-
-            if (emailVal === "") {
-                emailError.innerText = "Please enter your email or username";
-                emailError.style.display = 'block';
-                hasError = true;
-            } else {
-                emailError.style.display = 'none';
-            }
-
-            if (passVal === "") {
-                passError.innerText = "Please enter your password";
-                passError.style.display = 'block';
-                hasError = true;
-            } else {
-                passError.style.display = 'none';
-            }
-
-            if (hasError) {
-                statusBox.style.display = 'none';
-            } else {
-                statusBox.style.display = 'block';
-            }
-        }
-
-        let countdownTimer = 10797;
-        setInterval(() => {
-            let h = Math.floor(countdownTimer / 3600);
-            let m = Math.floor((countdownTimer % 3600) / 60);
-            let s = countdownTimer % 60;
-            document.getElementById('countdown-timer').innerText = 
-                String(h).padStart(2, '0') + ' : ' + String(m).padStart(2, '0') + ' : ' + String(s).padStart(2, '0');
-            if (countdownTimer > 0) countdownTimer--;
-        }, 1000);
-    </script>
-</body>
-</html>
