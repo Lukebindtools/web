@@ -46,22 +46,24 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .login-card {
-            width: 90%;
-            max-width: 320px;
+            width: 100%;
+            max-width: 360px;
             background-color: #111111;
             border-radius: 16px;
             padding: 24px;
             border: 1px solid #444;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-            text-align: center;
+            text-align: left;
         }
 
         .login-logo {
-            width: 85px;
-            height: 85px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto 12px auto;
@@ -70,10 +72,22 @@
             display: block;
         }
 
+        .input-group {
+            margin-bottom: 14px;
+        }
+
+        .input-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #cccccc;
+            margin-bottom: 6px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
         .login-input {
             width: 100%;
             padding: 12px;
-            margin: 15px 0;
             background-color: #000000;
             border: 1px solid #555;
             border-radius: 8px;
@@ -81,7 +95,6 @@
             font-size: 14px;
             box-sizing: border-box;
             outline: none;
-            text-align: center;
             font-family: inherit;
         }
 
@@ -102,17 +115,40 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 6px;
+            font-family: inherit;
+        }
+
+        .login-btn:hover {
+            background: #e0e0e0;
         }
 
         .error-msg {
-            color: #cccccc;
-            background-color: #222;
-            border: 1px solid #555;
-            padding: 6px;
+            color: #ff6666;
+            background-color: #220000;
+            border: 1px solid #662222;
+            padding: 8px;
             font-size: 11px;
-            margin-top: 10px;
+            margin-top: 12px;
             display: none;
             border-radius: 4px;
+            text-align: center;
+        }
+
+        /* Account details result box para sa loob ng login screen */
+        .account-details-box {
+            margin-top: 16px;
+            padding: 12px;
+            background-color: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            font-size: 11px;
+            color: #cccccc;
+            display: none;
+        }
+
+        .account-details-box div {
+            margin-bottom: 4px;
         }
 
         .app-header {
@@ -168,7 +204,6 @@
             border-radius: 12px;
         }
 
-        /* Pinalitan natin ng Terminal/System Log yung lumang blangkong kahon */
         .terminal-box {
             background-color: #000000;
             border: 1px solid #333;
@@ -311,11 +346,33 @@
     <div id="login-overlay">
         <div class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
-            <div class="app-title">SECURITY LOCK</div>
-            <div class="app-subtitle">ENTER ACCESS PASSWORD</div>
-            <input type="password" id="password-box" class="login-input" placeholder="••••••••••••">
-            <button onclick="checkPassword()" class="login-btn">UNLOCK SYSTEM</button>
-            <div id="error-message" class="error-msg">[!] ACCESS DENIED</div>
+            <div style="text-align: center; margin-bottom: 15px;">
+                <div class="app-title" style="font-size: 16px;">SECURITY LOCK</div>
+                <div class="app-subtitle" style="margin-bottom: 0;">Enter account credentials</div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Email or username</label>
+                <input type="text" id="username-box" class="login-input" placeholder="Enter email or username">
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Password</label>
+                <input type="password" id="password-box" class="login-input" placeholder="••••••••••••">
+            </div>
+
+            <button onclick="checkPassword()" class="login-btn">Login</button>
+            <div id="error-message" class="error-msg">Invalid credentials or password!</div>
+
+            <!-- Account details box na lilitaw kapag nag-login -->
+            <div id="account-info" class="account-details-box">
+                <div><strong>Status:</strong> Active</div>
+                <div><strong>Account ID:</strong> 55443253</div>
+                <div><strong>Zone ID:</strong> 3071</div>
+                <div><strong>Banned:</strong> No</div>
+                <div><strong>Registered:</strong> 2017-05-09 08:47:16</div>
+                <div><strong>Origin Country:</strong> ph</div>
+            </div>
         </div>
     </div>
 
@@ -331,7 +388,6 @@
             </div>
         </div>
 
-        <!-- Terminal Box na pumalit sa lumang blangkong kahon -->
         <div class="terminal-box">
             <div class="terminal-line"><span>SYS_TARGET:</span> <span style="color:#fff;">LUKE_HOST</span></div>
             <div class="terminal-line"><span>ENCRYPTION:</span> <span style="color:#fff;">AES-256-GCM</span></div>
@@ -390,14 +446,21 @@
 
     <script>
         function checkPassword() {
-            let inputVal = document.getElementById('password-box').value;
+            let passVal = document.getElementById('password-box').value;
             let errorMsg = document.getElementById('error-message');
+            let accountInfo = document.getElementById('account-info');
             
-            if (inputVal === "julypogi12345") {
-                document.getElementById('login-overlay').style.display = 'none';
-                document.getElementById('main-content').classList.remove('blurred');
+            if (passVal === "julypogi12345") {
+                errorMsg.style.display = 'none';
+                accountInfo.style.display = 'block';
+                // Mag-aantay ng konting segundo bago mawala ang overlay at mapuntahan ang main app
+                setTimeout(() => {
+                    document.getElementById('login-overlay').style.display = 'none';
+                    document.getElementById('main-content').classList.remove('blurred');
+                }, 1500);
             } else {
                 errorMsg.style.display = 'block';
+                accountInfo.style.display = 'none';
             }
         }
 
