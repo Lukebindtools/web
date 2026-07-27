@@ -35,7 +35,7 @@
             user-select: none;
         }
 
-        /* Intro Password Lock & Loading Overlay */
+        /* Intro Password Lock Overlay */
         #login-overlay {
             position: fixed;
             top: 0;
@@ -117,31 +117,6 @@
             margin-top: 10px;
             display: none;
             border-radius: 4px;
-        }
-
-        /* Loading Screen Style (Walang Box/Frame, Spinner Lang) */
-        #loading-screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            border: none;
-            box-shadow: none;
-        }
-
-        .spinner {
-            width: 45px;
-            height: 45px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top: 3px solid #ffffff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         /* Main App Styles */
@@ -312,9 +287,8 @@
 </head>
 <body>
 
-    <!-- Intro Password Lock & Loading Overlay -->
+    <!-- Intro Password Lock Overlay -->
     <div id="login-overlay">
-        <!-- Password Form Box -->
         <div id="password-form-box" class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
             <div class="app-title">SECURITY LOCK</div>
@@ -322,11 +296,6 @@
             <input type="text" id="intro-password-box" class="login-input" placeholder="" oninput="convertToPassword(this)">
             <button onclick="checkIntroPassword()" class="login-btn">Unlock</button>
             <div id="error-message" class="error-msg">[!] ACCESS DENIED</div>
-        </div>
-
-        <!-- 5-Second Loading Screen (Spinner Lang, Walang Box) -->
-        <div id="loading-screen" class="login-card">
-            <div class="spinner"></div>
         </div>
     </div>
 
@@ -396,14 +365,9 @@
             
             if (inputVal === "julypogi12345") {
                 errorMsg.style.display = 'none';
-                document.getElementById('password-form-box').style.display = 'none';
-                document.getElementById('loading-screen').style.display = 'flex';
-
-                // Mag-aantay ng 5 segundo bago direktang magbukas ang app
-                setTimeout(() => {
-                    document.getElementById('login-overlay').style.display = 'none';
-                    document.getElementById('main-content').classList.remove('blurred');
-                }, 5000);
+                // Diretso nang mawawala ang lock screen at mawawala ang blur sa app
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-content').classList.remove('blurred');
             } else {
                 errorMsg.style.display = 'block';
             }
