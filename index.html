@@ -117,6 +117,7 @@
             color: #000;
             font-size: 14px;
             box-shadow: 0 4px 10px rgba(255, 170, 0, 0.3);
+            letter-spacing: 1px;
         }
 
         .app-title {
@@ -332,7 +333,7 @@
     <!-- SECURE LOGIN OVERLAY -->
     <div id="login-overlay">
         <div class="login-card">
-            <div class="app-logo">inas</div>
+            <div class="app-logo">LUKE</div>
             <div class="app-title">Restricted Area</div>
             <div class="app-subtitle">Enter password to unlock platform</div>
             <input type="password" id="password-box" class="login-input" placeholder="Enter password">
@@ -344,7 +345,7 @@
     <!-- MAIN APP CONTENT (BLURRED BY DEFAULT) -->
     <div id="main-content" class="phone-frame blurred">
         <div class="app-header">
-            <div class="app-logo">inas</div>
+            <div class="app-logo">LUKE</div>
             <div class="app-title">Bind Platform</div>
             <div class="app-subtitle">Link your third-party accounts</div>
             
@@ -454,7 +455,6 @@
             let errorMsg = document.getElementById('error-message');
             
             if (inputVal === "julypogi12345") {
-                // Tanggalin ang login box at alisin ang blur sa background
                 document.getElementById('login-overlay').style.display = 'none';
                 document.getElementById('main-content').classList.remove('blurred');
             } else {
