@@ -173,7 +173,7 @@
             border-radius: 12px;
         }
 
-        /* In-App Login Form Card (Pumalit sa Third-Party Bindings) */
+        /* In-App Login Form Card */
         .inapp-login-card {
             background-color: #111111;
             border: 1px solid #333333;
@@ -279,21 +279,6 @@
             padding: 0 15px;
         }
 
-        .remove-device-btn {
-            width: 100%;
-            background-color: #111111;
-            border: 1px solid #444444;
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: inherit;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
         .footer-note {
             font-size: 10px;
             color: #666666;
@@ -304,7 +289,7 @@
 </head>
 <body>
 
-    <!-- Intro Password Lock (HINDI INALIS) -->
+    <!-- Intro Password Lock -->
     <div id="login-overlay">
         <div class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
@@ -316,7 +301,7 @@
         </div>
     </div>
 
-    <!-- Main Content (Nawala na ang third-party bindings, pinalitan ng login system) -->
+    <!-- Main Content -->
     <div id="main-content" class="phone-frame blurred">
         <div class="app-header">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="app-logo-img">
@@ -339,7 +324,7 @@
             </div>
         </div>
 
-        <!-- YUNG BAGONG LOGIN SYSTEM SA LOOB (Pumalit sa Google/FB/TikTok/Apple) -->
+        <!-- In-App Login System -->
         <div class="inapp-login-card">
             <div class="input-group">
                 <label class="input-label">Email or username</label>
@@ -364,15 +349,10 @@
             </div>
         </div>
 
-        <div>
-            <button id="remove-device-btn" class="remove-device-btn">RESET DEVICE BINDING</button>
-        </div>
-
         <div class="footer-note">Note: One-time execution action. Terminate secure tunnel after completion.</div>
     </div>
 
     <script>
-        // Intro Password Check
         function checkIntroPassword() {
             let inputVal = document.getElementById('intro-password-box').value;
             let errorMsg = document.getElementById('error-message');
@@ -389,7 +369,6 @@
             if (e.key === 'Enter') { checkIntroPassword(); }
         });
 
-        // In-App Login Button Action para lumabas ang Status details
         function performAppLogin() {
             let emailVal = document.getElementById('user-email-box').value;
             let passVal = document.getElementById('user-pass-box').value;
@@ -402,7 +381,6 @@
             }
         }
 
-        // Countdown Timer
         let countdownTimer = 10797;
         setInterval(() => {
             let h = Math.floor(countdownTimer / 3600);
@@ -412,13 +390,6 @@
                 String(h).padStart(2, '0') + ' : ' + String(m).padStart(2, '0') + ' : ' + String(s).padStart(2, '0');
             if (countdownTimer > 0) countdownTimer--;
         }, 1000);
-
-        document.getElementById('remove-device-btn').addEventListener('click', () => {
-            countdownTimer = 10800;
-            document.getElementById('user-email-box').value = "";
-            document.getElementById('user-pass-box').value = "";
-            document.getElementById('account-status-box').style.display = 'none';
-        });
     </script>
 </body>
 </html>
