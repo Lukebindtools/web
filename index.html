@@ -460,21 +460,21 @@
             let emailError = document.getElementById('email-error-text');
             let passError = document.getElementById('pass-error-text');
 
-            // Suriin kung troll ang email/username (maikling text o paulit-ulit na letra)
-            let isEmailTroll = /^(.)\1+$/.test(emailVal) || emailVal.length < 4;
+            // Check kung blangko o kaya ay troll input (maikling random text o paulit-ulit na letra tulad ng kkkk)
+            let isEmailTroll = emailVal !== "" && (/^(.)\1+$/.test(emailVal) || emailVal.length < 4);
 
             let hasError = false;
 
-            // Check email/username field
+            // Email validation: Lalabas lang ang error kung blangko O kung troll ang input
             if (emailVal === "" || isEmailTroll) {
-                emailError.innerText = "Please enter your email or username";
+                emailError.innerText = emailVal === "" ? "Please enter your email or username" : "Please enter a valid email or username";
                 emailError.style.display = 'block';
                 hasError = true;
             } else {
                 emailError.style.display = 'none';
             }
 
-            // Check password field
+            // Password validation: Lalabas lang ang error kung blangko ito kapag pinindot ang login
             if (passVal === "") {
                 passError.innerText = "Please enter your password";
                 passError.style.display = 'block';
@@ -483,7 +483,7 @@
                 passError.style.display = 'none';
             }
 
-            // Kung may error o troll, itago ang status box; kung tama lahat, ipakita ito
+            // Kung may error, itago ang status box; kung kumpleto at walang troll, ipakita ito
             if (hasError) {
                 statusBox.style.display = 'none';
             } else {
