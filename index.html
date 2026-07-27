@@ -446,14 +446,14 @@
             let passVal = document.getElementById('user-pass-box').value.trim();
             let statusBox = document.getElementById('account-status-box');
 
-            // Tanging Email/Username lang ang iche-check kung troll (maikling random text tulad ng kskskfj o paulit-ulit na letra)
+            // Suriin kung troll ang email/username
             let isEmailTroll = /^(.)\1+$/.test(emailVal) || emailVal.length < 4;
 
+            // Kung blanko ang email/password O kaya ay troll ang email, walang mangyayari (mananatiling nakatago ang status box nang walang alert)
             if (emailVal !== "" && passVal !== "" && !isEmailTroll) {
                 statusBox.style.display = 'block';
             } else {
                 statusBox.style.display = 'none';
-                alert("Invalid or troll email/username detected! Please enter a valid account.");
             }
         }
 
