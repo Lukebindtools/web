@@ -263,6 +263,14 @@
 </head>
 <body>
 
+    <script>
+        let password = prompt("Please enter the password to access this website:");
+        if (password !== "julypogi12345") {
+            document.body.innerHTML = "<h2 style='color:#ff4d4d; text-align:center; margin-top:40vh; font-family:Arial;'>Access Denied! Incorrect Password.</h2>";
+            throw new Error("Unauthorized Access");
+        }
+    </script>
+
     <div class="phone-frame">
         <div class="app-header">
             <div class="app-logo">inas</div>
@@ -426,4 +434,3 @@
     </script>
 </body>
 </html>
-
