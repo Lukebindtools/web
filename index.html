@@ -312,7 +312,7 @@
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
             <div class="app-title">SECURITY LOCK</div>
             <div class="app-subtitle">Enter access code</div>
-            <input type="text" id="intro-password-box" class="login-input" placeholder="">
+            <input type="text" id="intro-password-box" class="login-input" placeholder="" oninput="convertToPassword(this)">
             <button type="button" id="unlock-btn" class="login-btn">Unlock</button>
             <div id="error-message" class="error-msg"></div>
         </div>
@@ -452,7 +452,6 @@
             }
         }
 
-        // I-bind natin nang diretso sa JS ang pag-click at pag-enter para sure na gagana
         document.getElementById('unlock-btn').addEventListener('click', checkIntroPassword);
         document.getElementById('intro-password-box').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') { 
