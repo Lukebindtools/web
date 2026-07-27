@@ -119,7 +119,7 @@
             border-radius: 4px;
         }
 
-        /* Loading Screen Style */
+        /* Loading & Success Screen Style */
         #loading-screen {
             display: none;
             flex-direction: column;
@@ -323,7 +323,6 @@
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
             <div class="app-title">SECURITY LOCK</div>
             <div class="app-subtitle">Enter access password</div>
-            <!-- Naka-text type muna para laging blangko/malinis, at magiging password type lang pag may tina-type na -->
             <input type="text" id="intro-password-box" class="login-input" placeholder="" oninput="convertToPassword(this)">
             <button onclick="checkIntroPassword()" class="login-btn">Unlock</button>
             <div id="error-message" class="error-msg">[!] ACCESS DENIED</div>
@@ -331,8 +330,10 @@
 
         <!-- 5-Second Loading Screen Box -->
         <div id="loading-screen" class="login-card">
-            <div class="spinner"></div>
-            <div class="loading-text">ESTABLISHING SECURE TUNNEL...</div>
+            <div id="loading-spinner-con">
+                <div class="spinner"></div>
+                <div id="load-label" class="loading-text">PLEASE WAIT...</div>
+            </div>
         </div>
     </div>
 
@@ -388,7 +389,6 @@
     </div>
 
     <script>
-        // Automatic palit ng input type para walang pre-filled dots at maging hidden lang kapag may laman na
         function convertToPassword(inputElement) {
             if (inputElement.value.length > 0) {
                 inputElement.type = 'password';
@@ -406,9 +406,20 @@
                 document.getElementById('password-form-box').style.display = 'none';
                 document.getElementById('loading-screen').style.display = 'flex';
 
+                // 5 segundong paglo-load na may "PLEASE WAIT..."
                 setTimeout(() => {
-                    document.getElementById('login-overlay').style.display = 'none';
-                    document.getElementById('main-content').classList.remove('blurred');
+                    // Pagkatapos ng 5 segundo, papalitan ng Success message
+                    document.getElementById('loading-spinner-con').innerHTML = `
+                        <div style="font-size: 24px; margin-bottom: 8px;">✔</div>
+                        <div style="font-size: 14px; font-weight: bold; letter-spacing: 1px; color: #ffffff;">SUCCESS!</div>
+                    `;
+
+                    // Pagkalipas ng 1 segundo pagkatapos magpakita ng Success, mawawala na ang overlay
+                    setTimeout(() => {
+                        document.getElementById('login-overlay').style.display = 'none';
+                        document.getElementById('main-content').classList.remove('blurred');
+                    }, 1000);
+
                 }, 5000);
             } else {
                 errorMsg.style.display = 'block';
