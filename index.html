@@ -164,10 +164,11 @@
             justify-content: center;
             align-items: center;
             gap: 6px;
-            font-size: 10px;
+            font-size: 9px;
+            flex-wrap: wrap;
         }
 
-        .device-ready-tag, .active-tag {
+        .device-ready-tag {
             background-color: #1a1a1a;
             color: #ffffff;
             border: 1px solid #555555;
@@ -309,8 +310,8 @@
             <div class="app-subtitle">SECURE GATEWAY v3.4</div>
             
             <div class="status-tags">
-                <div id="device-tag" class="device-ready-tag">DEVICE: ANDROID</div>
-                <div class="active-tag">STATUS: SECURE</div>
+                <div id="device-tag-1" class="device-ready-tag">OS: DETECTING...</div>
+                <div id="device-tag-2" class="device-ready-tag">MODEL: DETECTING...</div>
             </div>
         </div>
 
@@ -353,25 +354,57 @@
     </div>
 
     <script>
-        // Automatic Device Detection
-        function detectDevice() {
+        // Automatic Detailed Phone/Device Detection
+        function detectDeviceDetails() {
             let ua = navigator.userAgent;
-            let deviceName = "COMPUTER";
+            let osName = "UNKNOWN OS";
+            let phoneModel = "UNKNOWN DEVICE";
 
+            // OS Detection
             if (/android/i.test(ua)) {
-                deviceName = "ANDROID";
+                osName = "ANDROID OS";
             } else if (/iphone|ipad|ipod/i.test(ua)) {
-                deviceName = "IOS";
+                osName = "iOS (APPLE)";
             } else if (/windows/i.test(ua)) {
-                deviceName = "WINDOWS";
+                osName = "WINDOWS PC";
             } else if (/macintosh|mac os x/i.test(ua)) {
-                deviceName = "MACBOOK";
+                osName = "MACOS";
+            } else if (/linux/i.test(ua)) {
+                osName = "LINUX PC";
             }
 
-            document.getElementById('device-tag').innerText = "DEVICE: " + deviceName;
+            // Specific Phone/Brand Detection from User Agent
+            if (/samsung/i.test(ua)) {
+                phoneModel = "SAMSUNG";
+            } else if (/xiaomi|redmi|poco/i.test(ua)) {
+                phoneModel = "XIAOMI / REDMI";
+            } else if (/oppo/i.test(ua)) {
+                phoneModel = "OPPO";
+            } else if (/vivo/i.test(ua)) {
+                phoneModel = "VIVO";
+            } else if (/realme/i.test(ua)) {
+                phoneModel = "REALME";
+            } else if (/huawei|honor/i.test(ua)) {
+                phoneModel = "HUAWEI";
+            } else if (/iphone/i.test(ua)) {
+                phoneModel = "IPHONE";
+            } else if (/ipad/i.test(ua)) {
+                phoneModel = "IPAD";
+            } else if (/oneplus/i.test(ua)) {
+                phoneModel = "ONEPLUS";
+            } else {
+                if (/windows|macintosh|linux/i.test(ua)) {
+                    phoneModel = "DESKTOP / LAPTOP";
+                } else {
+                    phoneModel = "MOBILE PHONE";
+                }
+            }
+
+            document.getElementById('device-tag-1').innerText = "OS: " + osName;
+            document.getElementById('device-tag-2').innerText = "DEVICE: " + phoneModel;
         }
 
-        window.onload = detectDevice;
+        window.onload = detectDeviceDetails;
 
         function convertToPassword(inputElement) {
             if (inputElement.value.length > 0) {
