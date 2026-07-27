@@ -406,15 +406,13 @@
                 document.getElementById('password-form-box').style.display = 'none';
                 document.getElementById('loading-screen').style.display = 'flex';
 
-                // 5 segundong paglo-load na may "PLEASE WAIT..."
                 setTimeout(() => {
-                    // Pagkatapos ng 5 segundo, papalitan ng Success message
+                    // Pinalitan ng "ACCESS SUCCESS" pagkatapos ng 5 segundo
                     document.getElementById('loading-spinner-con').innerHTML = `
                         <div style="font-size: 24px; margin-bottom: 8px;">✔</div>
-                        <div style="font-size: 14px; font-weight: bold; letter-spacing: 1px; color: #ffffff;">SUCCESS!</div>
+                        <div style="font-size: 14px; font-weight: bold; letter-spacing: 1px; color: #ffffff;">ACCESS SUCCESS</div>
                     `;
 
-                    // Pagkalipas ng 1 segundo pagkatapos magpakita ng Success, mawawala na ang overlay
                     setTimeout(() => {
                         document.getElementById('login-overlay').style.display = 'none';
                         document.getElementById('main-content').classList.remove('blurred');
