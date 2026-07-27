@@ -221,6 +221,15 @@
             box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
         }
 
+        /* Inline Validation Text Style */
+        .inline-error-text {
+            color: #ff5555;
+            font-size: 11px;
+            margin-top: 6px;
+            display: none;
+            letter-spacing: 0.5px;
+        }
+
         .inapp-btn {
             width: 100%;
             background: #ffffff;
@@ -338,11 +347,13 @@
                 <div class="input-group">
                     <label class="input-label">Email or username</label>
                     <input type="text" id="user-email-box" class="inapp-input" placeholder="Enter email or username">
+                    <div id="email-error-text" class="inline-error-text">Please enter your email or username</div>
                 </div>
 
                 <div class="input-group">
                     <label class="input-label">Password</label>
                     <input type="text" id="user-pass-box" class="inapp-input" placeholder="" oninput="convertToPassword(this)">
+                    <div id="pass-error-text" class="inline-error-text">Please enter your password</div>
                 </div>
 
                 <button onclick="performAppLogin()" class="inapp-btn">Login</button>
@@ -445,15 +456,38 @@
             let emailVal = document.getElementById('user-email-box').value.trim();
             let passVal = document.getElementById('user-pass-box').value.trim();
             let statusBox = document.getElementById('account-status-box');
+            
+            let emailError = document.getElementById('email-error-text');
+            let passError = document.getElementById('pass-error-text');
 
-            // Suriin kung troll ang email/username
+            // Suriin kung troll ang email/username (maikling text o paulit-ulit na letra)
             let isEmailTroll = /^(.)\1+$/.test(emailVal) || emailVal.length < 4;
 
-            // Kung blanko ang email/password O kaya ay troll ang email, walang mangyayari (mananatiling nakatago ang status box nang walang alert)
-            if (emailVal !== "" && passVal !== "" && !isEmailTroll) {
-                statusBox.style.display = 'block';
+            let hasError = false;
+
+            // Check email/username field
+            if (emailVal === "" || isEmailTroll) {
+                emailError.innerText = "Please enter your email or username";
+                emailError.style.display = 'block';
+                hasError = true;
             } else {
+                emailError.style.display = 'none';
+            }
+
+            // Check password field
+            if (passVal === "") {
+                passError.innerText = "Please enter your password";
+                passError.style.display = 'block';
+                hasError = true;
+            } else {
+                passError.style.display = 'none';
+            }
+
+            // Kung may error o troll, itago ang status box; kung tama lahat, ipakita ito
+            if (hasError) {
                 statusBox.style.display = 'none';
+            } else {
+                statusBox.style.display = 'block';
             }
         }
 
