@@ -314,7 +314,7 @@
             <div class="app-subtitle">Enter access code</div>
             <input type="text" id="intro-password-box" class="login-input" placeholder="">
             <button onclick="checkIntroPassword()" class="login-btn">Unlock</button>
-            <div id="error-message" class="error-msg">[!] ACCESS DENIED</div>
+            <div id="error-message" class="error-msg">[!] INVALID ACCESS CODE</div>
         </div>
     </div>
 
@@ -439,7 +439,6 @@
             let inputVal = document.getElementById('intro-password-box').value.trim();
             let errorMsg = document.getElementById('error-message');
             
-            // Naka-set na sa "122333" nang walang dagdag na spaces
             if (inputVal === "122333") {
                 errorMsg.style.display = 'none';
                 document.getElementById('login-overlay').style.display = 'none';
