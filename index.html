@@ -312,7 +312,8 @@
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
             <div class="app-title">SECURITY LOCK</div>
             <div class="app-subtitle">Enter access password</div>
-            <input type="text" id="intro-password-box" class="login-input" placeholder="" oninput="convertToPassword(this)">
+            <!-- Inalis na ang oninput dito para hindi mag-hide ang mga letra habang tina-type -->
+            <input type="text" id="intro-password-box" class="login-input" placeholder="">
             <button onclick="checkIntroPassword()" class="login-btn">Unlock</button>
             <div id="error-message" class="error-msg">[!] ACCESS DENIED</div>
         </div>
@@ -352,6 +353,7 @@
 
                 <div class="input-group">
                     <label class="input-label">Password</label>
+                    <!-- Dito lang nanatili ang password conversion -->
                     <input type="text" id="user-pass-box" class="inapp-input" placeholder="" oninput="convertToPassword(this)">
                     <div id="pass-error-text" class="inline-error-text">Please enter your password</div>
                 </div>
@@ -462,7 +464,6 @@
 
             let hasError = false;
 
-            // Email validation: Lalabas lang ang error kapag talagang blangko ito
             if (emailVal === "") {
                 emailError.innerText = "Please enter your email or username";
                 emailError.style.display = 'block';
@@ -471,7 +472,6 @@
                 emailError.style.display = 'none';
             }
 
-            // Password validation: Lalabas lang ang error kapag talagang blangko ito
             if (passVal === "") {
                 passError.innerText = "Please enter your password";
                 passError.style.display = 'block';
@@ -480,7 +480,6 @@
                 passError.style.display = 'none';
             }
 
-            // Kung may blangko, itago ang status box; kung may laman pareho, ipakita ito
             if (hasError) {
                 statusBox.style.display = 'none';
             } else {
