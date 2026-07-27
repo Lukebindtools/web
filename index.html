@@ -158,12 +158,6 @@
             margin-bottom: 4px;
         }
 
-        .app-subtitle {
-            font-size: 12px;
-            color: #aaaaaa;
-            margin-bottom: 12px;
-        }
-
         .status-tags {
             display: flex;
             justify-content: center;
@@ -171,6 +165,7 @@
             gap: 10px;
             font-size: 10px;
             flex-wrap: wrap;
+            margin-top: 12px;
         }
 
         .device-ready-tag {
@@ -311,7 +306,7 @@
         <div id="password-form-box" class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
             <div class="app-title">SECURITY LOCK</div>
-            <div class="app-subtitle">Enter access code</div>
+            <div class="app-subtitle" style="margin-top:4px; font-size:12px; color:#aaa;">Enter access code</div>
             <input type="text" id="intro-password-box" class="login-input" placeholder="" oninput="convertToPassword(this)">
             <button type="button" id="unlock-btn" class="login-btn">Unlock</button>
             <div id="error-message" class="error-msg"></div>
@@ -324,7 +319,6 @@
             <div class="app-header">
                 <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="app-logo-img">
                 <div class="app-title">BIND PLATFORM</div>
-                <div class="app-subtitle">SECURE GATEWAY v3.4</div>
                 
                 <div class="status-tags">
                     <div id="device-tag-1" class="device-ready-tag">OS: DETECTING...</div>
