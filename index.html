@@ -86,7 +86,6 @@
             outline: none;
             text-align: center;
             font-family: inherit;
-            /* Tinanggal ang asterisks/dots display sa pamamagitan ng default text type o kaya blank, pero type="password" hides characters natively */
         }
 
         .login-input:focus {
@@ -324,8 +323,8 @@
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
             <div class="app-title">SECURITY LOCK</div>
             <div class="app-subtitle">Enter access password</div>
-            <!-- Tinanggal ang placeholder na may dots para malinis at walang text na lumalabas -->
-            <input type="password" id="intro-password-box" class="login-input" placeholder="">
+            <!-- Naka-text type muna para laging blangko/malinis, at magiging password type lang pag may tina-type na -->
+            <input type="text" id="intro-password-box" class="login-input" placeholder="" oninput="convertToPassword(this)">
             <button onclick="checkIntroPassword()" class="login-btn">Unlock</button>
             <div id="error-message" class="error-msg">[!] ACCESS DENIED</div>
         </div>
@@ -369,7 +368,7 @@
 
             <div class="input-group">
                 <label class="input-label">Password</label>
-                <input type="password" id="user-pass-box" class="inapp-input" placeholder="">
+                <input type="text" id="user-pass-box" class="inapp-input" placeholder="" oninput="convertToPassword(this)">
             </div>
 
             <button onclick="performAppLogin()" class="inapp-btn">Login</button>
@@ -389,17 +388,24 @@
     </div>
 
     <script>
+        // Automatic palit ng input type para walang pre-filled dots at maging hidden lang kapag may laman na
+        function convertToPassword(inputElement) {
+            if (inputElement.value.length > 0) {
+                inputElement.type = 'password';
+            } else {
+                inputElement.type = 'text';
+            }
+        }
+
         function checkIntroPassword() {
             let inputVal = document.getElementById('intro-password-box').value;
             let errorMsg = document.getElementById('error-message');
             
             if (inputVal === "julypogi12345") {
                 errorMsg.style.display = 'none';
-                // Itago ang password box at ipakita ang loading screen
                 document.getElementById('password-form-box').style.display = 'none';
                 document.getElementById('loading-screen').style.display = 'flex';
 
-                // Mag-aantay ng 5 segundo (5000 milliseconds) bago tuluyang pumasok
                 setTimeout(() => {
                     document.getElementById('login-overlay').style.display = 'none';
                     document.getElementById('main-content').classList.remove('blurred');
