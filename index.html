@@ -6,11 +6,11 @@
     <title>Bind Platform - LUKE</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #0c0c0c;
-            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000000;
+            color: #ffffff;
             margin: 0;
-            padding: 20px;
+            padding: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,11 +20,11 @@
         .phone-frame {
             width: 100%;
             max-width: 420px;
-            background-color: #121212;
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-            border: 1px solid #222;
+            background-color: #0a0a0a;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+            border: 1px solid #333333;
             box-sizing: border-box;
             transition: filter 0.4s ease;
         }
@@ -41,7 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(12, 12, 12, 0.95);
+            background-color: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,23 +50,23 @@
 
         .login-card {
             width: 90%;
-            max-width: 340px;
-            background-color: #161616;
-            border-radius: 20px;
+            max-width: 320px;
+            background-color: #111111;
+            border-radius: 16px;
             padding: 24px;
-            border: 1px solid #333;
-            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.05);
+            border: 1px solid #444;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
             text-align: center;
         }
 
         .login-logo {
-            width: 90px;
-            height: 90px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto 12px auto;
             border: 2px solid #ffffff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
             display: block;
         }
 
@@ -74,125 +74,139 @@
             width: 100%;
             padding: 12px;
             margin: 15px 0;
-            background-color: #1a1a1a;
-            border: 1px solid #444;
-            border-radius: 10px;
+            background-color: #000000;
+            border: 1px solid #555;
+            border-radius: 8px;
             color: #fff;
             font-size: 14px;
             box-sizing: border-box;
             outline: none;
             text-align: center;
+            font-family: inherit;
         }
 
         .login-input:focus {
             border-color: #ffffff;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
         }
 
         .login-btn {
             width: 100%;
             background: #ffffff;
-            color: #000;
+            color: #000000;
             border: none;
             padding: 12px;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: bold;
             font-size: 14px;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .error-msg {
-            color: #ff4d4d;
-            font-size: 12px;
+            color: #cccccc;
+            background-color: #222;
+            border: 1px solid #555;
+            padding: 6px;
+            font-size: 11px;
             margin-top: 10px;
             display: none;
+            border-radius: 4px;
         }
 
         .app-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .app-logo-img {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             object-fit: cover;
-            margin: 0 auto 12px auto;
+            margin: 0 auto 10px auto;
             border: 2px solid #ffffff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
             display: block;
         }
 
         .app-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 4px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
         }
 
         .app-subtitle {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 16px;
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-bottom: 12px;
         }
 
         .status-tags {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            font-size: 12px;
+            gap: 8px;
+            font-size: 11px;
         }
 
         .device-ready-tag {
-            background-color: #1a2a1a;
-            color: #4cd964;
-            border: 1px solid #2d5a2d;
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            border: 1px solid #555555;
+            padding: 4px 10px;
+            border-radius: 12px;
         }
 
         .active-tag {
-            background-color: #222;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            background-color: #333333;
+            color: #ffffff;
+            border: 1px solid #777777;
+            padding: 4px 10px;
+            border-radius: 12px;
         }
 
-        .encrypted-box {
-            background-color: #1a1a1a;
-            border: 1px solid #252525;
-            height: 60px;
-            border-radius: 12px;
-            margin-bottom: 16px;
+        /* Pinalitan natin ng Terminal/System Log yung lumang blangkong kahon */
+        .terminal-box {
+            background-color: #000000;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 11px;
+            color: #cccccc;
+        }
+
+        .terminal-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+
+        .terminal-line:last-child {
+            margin-bottom: 0;
         }
 
         .countdown-card {
-            background-color: #1a1a1a;
-            border: 1px solid #252525;
-            border-radius: 16px;
-            padding: 16px;
+            background-color: #111111;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 12px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
         }
 
         .countdown-title {
-            font-size: 11px;
-            color: #777;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            font-size: 10px;
+            color: #888888;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
         }
 
         .countdown-timer-display {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: bold;
             color: #ffffff;
             letter-spacing: 2px;
@@ -201,91 +215,94 @@
         .countdown-labels {
             display: flex;
             justify-content: space-around;
-            font-size: 10px;
-            color: #666;
-            margin-top: 4px;
-            padding: 0 20px;
+            font-size: 9px;
+            color: #777777;
+            margin-top: 2px;
+            padding: 0 15px;
         }
 
         .section-label {
-            font-size: 11px;
-            color: #777;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            font-size: 10px;
+            color: #888888;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
         .bindings-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 14px;
         }
 
         .binding-item {
-            background-color: #1a1a1a;
-            border: 1px solid #252525;
-            border-radius: 14px;
-            padding: 12px 16px;
+            background-color: #111111;
+            border: 1px solid #262626;
+            border-radius: 10px;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .binding-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
         .binding-name {
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: bold;
         }
 
         .binding-right {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
         }
 
         .status-indicator.available {
-            color: #888;
-            font-size: 12px;
+            color: #777777;
+            font-size: 11px;
         }
 
         .status-indicator.connected {
-            color: #4cd964;
-            font-size: 12px;
+            color: #ffffff;
+            background-color: #222;
+            border: 1px solid #555;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
         }
 
         .action-btn {
             background: #ffffff;
-            color: #000;
+            color: #000000;
             border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 11px;
             cursor: pointer;
+            font-family: inherit;
         }
 
         .remove-device-btn {
             width: 100%;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 500;
+            background-color: #111111;
+            border: 1px solid #444444;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
             cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
         .footer-note {
-            font-size: 11px;
-            color: #666;
+            font-size: 10px;
+            color: #666666;
             text-align: center;
-            line-height: 1.4;
+            line-height: 1.3;
         }
     </style>
 </head>
@@ -295,30 +312,35 @@
         <div class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
             <div class="app-title">SECURITY LOCK</div>
-            <div class="app-subtitle">Enter password to continue</div>
-            <input type="password" id="password-box" class="login-input" placeholder="Enter password">
-            <button onclick="checkPassword()" class="login-btn">Unlock</button>
-            <div id="error-message" class="error-msg">Incorrect Password!</div>
+            <div class="app-subtitle">ENTER ACCESS PASSWORD</div>
+            <input type="password" id="password-box" class="login-input" placeholder="••••••••••••">
+            <button onclick="checkPassword()" class="login-btn">UNLOCK SYSTEM</button>
+            <div id="error-message" class="error-msg">[!] ACCESS DENIED</div>
         </div>
     </div>
 
     <div id="main-content" class="phone-frame blurred">
         <div class="app-header">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="app-logo-img">
-            <div class="app-title">Bind Platform</div>
-            <div class="app-subtitle">Link your third-party accounts</div>
+            <div class="app-title">BIND PLATFORM</div>
+            <div class="app-subtitle">SECURE GATEWAY v3.4</div>
             
             <div class="status-tags">
-                <div class="device-ready-tag"><span>•</span> ANDROID</div>
-                <div class="active-tag"><span>•</span> Active</div>
+                <div class="device-ready-tag">PLATFORM: ANDROID</div>
+                <div class="active-tag">STATUS: SECURE</div>
             </div>
         </div>
 
-        <div class="encrypted-box"></div>
+        <!-- Terminal Box na pumalit sa lumang blangkong kahon -->
+        <div class="terminal-box">
+            <div class="terminal-line"><span>SYS_TARGET:</span> <span style="color:#fff;">LUKE_HOST</span></div>
+            <div class="terminal-line"><span>ENCRYPTION:</span> <span style="color:#fff;">AES-256-GCM</span></div>
+            <div class="terminal-line"><span>HANDSHAKE:</span> <span style="color:#fff;">ESTABLISHED</span></div>
+        </div>
 
         <div class="countdown-card">
             <div class="countdown-title">SESSION EXPIRES IN</div>
-            <div id="countdown-timer" class="countdown-timer-display">02 : 59 : 39</div>
+            <div id="countdown-timer" class="countdown-timer-display">02 : 59 : 57</div>
             <div class="countdown-labels">
                 <span>HOURS</span>
                 <span>MIN</span>
@@ -330,28 +352,28 @@
 
         <div class="bindings-list">
             <div class="binding-item">
-                <div class="binding-info"><span class="binding-name">Google</span></div>
+                <span class="binding-name">Google</span>
                 <div class="binding-right">
                     <span id="google-status" class="status-indicator available">Available</span>
                     <button id="google-connect-btn" class="action-btn">Connect</button>
                 </div>
             </div>
             <div class="binding-item">
-                <div class="binding-info"><span class="binding-name">Facebook</span></div>
+                <span class="binding-name">Facebook</span>
                 <div class="binding-right">
                     <span id="facebook-status" class="status-indicator available">Available</span>
                     <button id="facebook-connect-btn" class="action-btn">Connect</button>
                 </div>
             </div>
             <div class="binding-item">
-                <div class="binding-info"><span class="binding-name">TikTok</span></div>
+                <span class="binding-name">TikTok</span>
                 <div class="binding-right">
                     <span id="tiktok-status" class="status-indicator available">Available</span>
                     <button id="tiktok-connect-btn" class="action-btn">Connect</button>
                 </div>
             </div>
             <div class="binding-item">
-                <div class="binding-info"><span class="binding-name">Apple</span></div>
+                <span class="binding-name">Apple</span>
                 <div class="binding-right">
                     <span id="apple-status" class="status-indicator available">Available</span>
                     <button id="apple-connect-btn" class="action-btn">Connect</button>
@@ -359,11 +381,11 @@
             </div>
         </div>
 
-        <div style="margin-bottom: 20px;">
-            <button id="remove-device-btn" class="remove-device-btn">Remove Device</button>
+        <div>
+            <button id="remove-device-btn" class="remove-device-btn">RESET DEVICE BINDING</button>
         </div>
 
-        <div class="footer-note">Note: This is a one-time success action, close your VPN after a successful login.</div>
+        <div class="footer-note">Note: One-time execution action. Terminate secure tunnel after completion.</div>
     </div>
 
     <script>
@@ -383,7 +405,7 @@
             if (e.key === 'Enter') { checkPassword(); }
         });
 
-        let countdownTimer = 10779;
+        let countdownTimer = 10797;
         let bindings = { google: false, facebook: false, tiktok: false, apple: false };
 
         setInterval(() => {
@@ -398,7 +420,7 @@
         function toggleService(service) {
             let statusEl = document.getElementById(`${service}-status`);
             bindings[service] = !bindings[service];
-            statusEl.innerText = bindings[service] ? 'Connected' : 'Available';
+            statusEl.innerText = bindings[service] ? 'CONNECTED' : 'Available';
             statusEl.className = bindings[service] ? 'status-indicator connected' : 'status-indicator available';
         }
 
