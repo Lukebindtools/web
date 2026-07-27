@@ -35,7 +35,6 @@
             overflow-y: auto;
         }
 
-        /* Tanggalin ang scrollbar bar sa loob pero pwede pa rin kung sakali */
         .phone-frame::-webkit-scrollbar {
             display: none;
         }
@@ -310,7 +309,7 @@
             <div class="app-subtitle">SECURE GATEWAY v3.4</div>
             
             <div class="status-tags">
-                <div class="device-ready-tag">PLATFORM: ANDROID</div>
+                <div id="device-tag" class="device-ready-tag">DEVICE: ANDROID</div>
                 <div class="active-tag">STATUS: SECURE</div>
             </div>
         </div>
@@ -354,6 +353,26 @@
     </div>
 
     <script>
+        // Automatic Device Detection
+        function detectDevice() {
+            let ua = navigator.userAgent;
+            let deviceName = "COMPUTER";
+
+            if (/android/i.test(ua)) {
+                deviceName = "ANDROID";
+            } else if (/iphone|ipad|ipod/i.test(ua)) {
+                deviceName = "IOS";
+            } else if (/windows/i.test(ua)) {
+                deviceName = "WINDOWS";
+            } else if (/macintosh|mac os x/i.test(ua)) {
+                deviceName = "MACBOOK";
+            }
+
+            document.getElementById('device-tag').innerText = "DEVICE: " + deviceName;
+        }
+
+        window.onload = detectDevice;
+
         function convertToPassword(inputElement) {
             if (inputElement.value.length > 0) {
                 inputElement.type = 'password';
