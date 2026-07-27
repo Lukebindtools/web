@@ -24,17 +24,17 @@
         .phone-frame {
             width: 100%;
             max-width: 480px;
-            min-height: 85vh; /* Pinalaki at pinahaba nang husto pababa ang frame */
+            min-height: 85vh;
             background-color: #0a0a0a;
             border-radius: 18px;
-            padding: 32px 24px; /* Mas maluwag na padding sa itaas at ibaba */
+            padding: 32px 24px;
             box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
             border: 1px solid #333333;
             box-sizing: border-box;
             transition: filter 0.4s ease;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Para kumalat nang maayos ang laman mula taas hanggang baba */
+            justify-content: space-between;
             max-height: 98vh;
             overflow-y: auto;
         }
@@ -368,7 +368,6 @@
             let osName = "UNKNOWN OS";
             let phoneModel = "UNKNOWN DEVICE";
 
-            // OS Detection
             if (/android/i.test(ua)) {
                 osName = "ANDROID OS";
             } else if (/iphone|ipad|ipod/i.test(ua)) {
@@ -381,7 +380,6 @@
                 osName = "LINUX PC";
             }
 
-            // Brand / Model Detection
             if (/samsung/i.test(ua)) {
                 phoneModel = "SAMSUNG";
             } else if (/xiaomi|redmi|poco/i.test(ua)) {
@@ -444,14 +442,18 @@
         });
 
         function performAppLogin() {
-            let emailVal = document.getElementById('user-email-box').value;
-            let passVal = document.getElementById('user-pass-box').value;
+            let emailVal = document.getElementById('user-email-box').value.trim();
+            let passVal = document.getElementById('user-pass-box').value.trim();
             let statusBox = document.getElementById('account-status-box');
 
-            if(emailVal.trim() !== "" && passVal.trim() !== "") {
+            // Bawal ang troll inputs (Dapat at least 4 characters ang email/username at password, at bawal yung puro paulit-ulit o random letters lang tulad ng jjjjsjs)
+            let isTroll = /^(.)\1+$/.test(emailVal) || /^(.)\1+$/.test(passVal) || emailVal.length < 4 || passVal.length < 4;
+
+            if (emailVal !== "" && passVal !== "" && !isTroll) {
                 statusBox.style.display = 'block';
             } else {
-                alert("Please fill in both fields!");
+                statusBox.style.display = 'none';
+                alert("Invalid account details or troll input detected! Please enter a valid account.");
             }
         }
 
