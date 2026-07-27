@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bind Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0c0c0c;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 420px;
+            background-color: #121212;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid #222;
+            box-sizing: border-box;
+        }
+
+        .app-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .app-logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border-radius: 12px;
+            margin: 0 auto 12px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #000;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(255, 170, 0, 0.3);
+        }
+
+        .app-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .app-subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
+        .status-tags {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+
+        .device-ready-tag {
+            background-color: #1a2a1a;
+            color: #4cd964;
+            border: 1px solid #2d5a2d;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .device-ready-tag span::before {
+            content: "• ";
+            color: #4cd964;
+            font-size: 16px;
+        }
+
+        .active-tag {
+            background-color: #2a2515;
+            color: #ffaa00;
+            border: 1px solid #5a4a1d;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .active-tag span::before {
+            content: "• ";
+            color: #ffaa00;
+            font-size: 16px;
+        }
+
+        .encrypted-box {
+            background-color: #1a1a1a;
+            border: 1px solid #252525;
+            height: 60px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .countdown-card {
+            background-color: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .countdown-title {
+            font-size: 11px;
+            color: #777;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .countdown-timer-display {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ffaa00;
+            letter-spacing: 2px;
+        }
+
+        .countdown-labels {
+            display: flex;
+            justify-content: space-around;
+            font-size: 10px;
+            color: #666;
+            margin-top: 4px;
+            padding: 0 20px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            color: #777;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .bindings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .binding-item {
+            background-color: #1a1a1a;
+            border: 1px solid #252525;
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .binding-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .binding-info img, .binding-info svg {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+
+        .binding-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .binding-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .status-indicator {
+            font-size: 12px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-indicator.available::before {
+            content: "•";
+            color: #888;
+            font-size: 14px;
+        }
+
+        .status-indicator.connected::before {
+            content: "•";
+            color: #4cd964;
+            font-size: 14px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .action-btn:active {
+            opacity: 0.8;
+        }
+
+        .remove-btn-container {
+            margin-bottom: 20px;
+        }
+
+        .remove-device-btn {
+            width: 100%;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .remove-device-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+            opacity: 0.8;
+        }
+
+        .footer-note {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="app-header">
+            <div class="app-logo">inas</div>
+            <div class="app-title">Bind Platform</div>
+            <div class="app-subtitle">Link your third-party accounts</div>
+            
+            <div class="status-tags">
+                <div class="device-ready-tag">
+                    <span></span> Device Ready ( ANDROID )
+                </div>
+                <div class="active-tag">
+                    <span></span> Active
+                </div>
+            </div>
+        </div>
+
+        <div class="encrypted-box"></div>
+
+        <div class="countdown-card">
+            <div class="countdown-title">SESSION EXPIRES IN</div>
+            <div id="countdown-timer" class="countdown-timer-display">02 : 59 : 39</div>
+            <div class="countdown-labels">
+                <span>HOURS</span>
+                <span>MIN</span>
+                <span>SEC</span>
+            </div>
+        </div>
+
+        <div class="section-label">THIRD-PARTY BINDINGS</div>
+
+        <div class="bindings-list">
+            <!-- Google -->
+            <div class="binding-item">
+                <div class="binding-info">
+                    <svg viewBox="0 0 24 24" width="22" height="22">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.2v3.15C3.17 21.32 7.22 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.2C.44 8.1 0 9.8 0 12s.44 3.9 1.2 5.42l4.08-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.22 0 3.17 2.68 1.2 6.58l4.08 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                    </svg>
+                    <span class="binding-name">Google</span>
+                </div>
+                <div class="binding-right">
+                    <span id="google-status" class="status-indicator available">Available</span>
+                    <button id="google-connect-btn" class="action-btn">Connect</button>
+                </div>
+            </div>
+
+            <!-- Facebook -->
+            <div class="binding-item">
+                <div class="binding-info">
+                    <svg viewBox="0 0 24 24" width="22" height="22">
+                        <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <span class="binding-name">Facebook</span>
+                </div>
+                <div class="binding-right">
+                    <span id="facebook-status" class="status-indicator available">Available</span>
+                    <button id="facebook-connect-btn" class="action-btn">Connect</button>
+                </div>
+            </div>
+
+            <!-- TikTok -->
+            <div class="binding-item">
+                <div class="binding-info">
+                    <svg viewBox="0 0 24 24" width="22" height="22">
+                        <path fill="#ffffff" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                    </svg>
+                    <span class="binding-name">TikTok</span>
+                </div>
+                <div class="binding-right">
+                    <span id="tiktok-status" class="status-indicator available">Available</span>
+                    <button id="tiktok-connect-btn" class="action-btn">Connect</button>
+                </div>
+            </div>
+
+            <!-- Apple -->
+            <div class="binding-item">
+                <div class="binding-info">
+                    <svg viewBox="0 0 24 24" width="22" height="22">
+                        <path fill="#ffffff" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 5.38c.65-.79 1.09-1.88.97-2.98-.94.04-2.08.63-2.75 1.42-.6.7-1.13 1.81-.99 2.88 1.06.08 2.12-.53 2.77-1.32z"/>
+                    </svg>
+                    <span class="binding-name">Apple</span>
+                </div>
+                <div class="binding-right">
+                    <span id="apple-status" class="status-indicator available">Available</span>
+                    <button id="apple-connect-btn" class="action-btn">Connect</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="remove-btn-container">
+            <button id="remove-device-btn" class="remove-device-btn">
+                <svg viewBox="0 0 24 24">
+                    <path d="M17 2H7C5.897 2 5 2.897 5 4v16c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM7 20V4h10l.001 16H7z"/>
+                    <path d="M11 18h2v2h-2z"/>
+                </svg>
+                Remove Device
+            </button>
+        </div>
+
+        <div class="footer-note">
+            Note: This is a one-time success action, close your VPN after a successful login.
+        </div>
+    </div>
+
+    <script>
+        let countdownTimer = 10779; 
+        let intervalId;
+        let bindings = {
+            google: false,
+            facebook: false,
+            tiktok: false,
+            apple: false,
+        };
+
+        function updateCountdownTimer() {
+            let hours = Math.floor(countdownTimer / 3600);
+            let minutes = Math.floor((countdownTimer % 3600) / 60);
+            let seconds = countdownTimer % 60;
+            
+            document.getElementById('countdown-timer').innerText = 
+                String(hours).padStart(2, '0') + ' : ' + 
+                String(minutes).padStart(2, '0') + ' : ' + 
+                String(seconds).padStart(2, '0');
+            
+            if (countdownTimer > 0) {
+                countdownTimer--;
+            }
+        }
+
+        function toggleService(service) {
+            let statusEl = document.getElementById(`${service}-status`);
+
+            if (!bindings[service]) {
+                bindings[service] = true;
+                statusEl.innerText = 'Connected';
+                statusEl.className = 'status-indicator connected';
+                statusEl.style.color = '#4cd964';
+            } else {
+                bindings[service] = false;
+                statusEl.innerText = 'Available';
+                statusEl.className = 'status-indicator available';
+                statusEl.style.color = '#888';
+            }
+        }
+
+        intervalId = setInterval(updateCountdownTimer, 1000);
+
+        document.getElementById('google-connect-btn').addEventListener('click', () => toggleService('google'));
+        document.getElementById('facebook-connect-btn').addEventListener('click', () => toggleService('facebook'));
+        document.getElementById('tiktok-connect-btn').addEventListener('click', () => toggleService('tiktok'));
+        document.getElementById('apple-connect-btn').addEventListener('click', () => toggleService('apple'));
+
+        document.getElementById('remove-device-btn').addEventListener('click', () => {
+            countdownTimer = 10800;
+            ['google', 'facebook', 'tiktok', 'apple'].forEach(s => {
+                if(bindings[s]) toggleService(s);
+            });
+        });
+    </script>
+</body>
+</html>
+
