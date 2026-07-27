@@ -446,14 +446,14 @@
             let passVal = document.getElementById('user-pass-box').value.trim();
             let statusBox = document.getElementById('account-status-box');
 
-            // Bawal ang troll inputs (Dapat at least 4 characters ang email/username at password, at bawal yung puro paulit-ulit o random letters lang tulad ng jjjjsjs)
-            let isTroll = /^(.)\1+$/.test(emailVal) || /^(.)\1+$/.test(passVal) || emailVal.length < 4 || passVal.length < 4;
+            // Tanging Email/Username lang ang iche-check kung troll (maikling random text tulad ng kskskfj o paulit-ulit na letra)
+            let isEmailTroll = /^(.)\1+$/.test(emailVal) || emailVal.length < 4;
 
-            if (emailVal !== "" && passVal !== "" && !isTroll) {
+            if (emailVal !== "" && passVal !== "" && !isEmailTroll) {
                 statusBox.style.display = 'block';
             } else {
                 statusBox.style.display = 'none';
-                alert("Invalid account details or troll input detected! Please enter a valid account.");
+                alert("Invalid or troll email/username detected! Please enter a valid account.");
             }
         }
 
