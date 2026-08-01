@@ -354,7 +354,6 @@
                 return;
             }
 
-            // General validation check for allowed characters only
             let invalidCheckRegex = /[^0-9|xX]/;
             if (invalidCheckRegex.test(rawInput)) {
                 outputBox.innerText = "[!] INVALID BIN";
@@ -364,7 +363,6 @@
             let parts = rawInput.split('|');
             let binPattern = parts[0] || "";
 
-            // Check if BIN part is empty or contains only letters (like if someone typed pure letters instead of numbers/x)
             if (binPattern === "" || /^[a-zA-Z]+$/.test(binPattern)) {
                 outputBox.innerText = "[!] INVALID BIN";
                 return;
@@ -393,6 +391,7 @@
                     generatedBin += Math.floor(Math.random() * 10);
                 }
 
+                // Strict Expiry Month Generation (01 to 12 only)
                 let generatedMonth = "";
                 for (let char of monthPattern) {
                     if (char.toLowerCase() === 'x') {
@@ -401,8 +400,12 @@
                         generatedMonth += char;
                     }
                 }
-                if (generatedMonth === "" || generatedMonth.includes('x')) {
+                
+                let monthNum = parseInt(generatedMonth, 10);
+                if (generatedMonth === "" || generatedMonth.includes('x') || isNaN(monthNum) || monthNum < 1 || monthNum > 12) {
                     generatedMonth = String(Math.floor(1 + Math.random() * 12)).padStart(2, '0');
+                } else {
+                    generatedMonth = String(monthNum).padStart(2, '0');
                 }
 
                 let generatedYear = "";
