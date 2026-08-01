@@ -289,7 +289,7 @@
 
                 <div class="input-group">
                     <label class="input-label">Format: Bin|Expiry|Year|CVV</label>
-                    <input type="text" id="raw-card-box" class="inapp-input" value="545512|xx|xxxx|xxx">
+                    <input type="text" id="raw-card-box" class="inapp-input" value="" placeholder="e.g. 545512|xx|xxxx|xxx">
                 </div>
 
                 <div class="input-group">
@@ -366,7 +366,6 @@
             let results = [];
             
             for (let i = 0; i < count; i++) {
-                // Palitan ang mga 'x' o random digits sa BIN
                 let generatedBin = "";
                 for (let char of binPattern) {
                     if (char.toLowerCase() === 'x') {
@@ -375,12 +374,10 @@
                         generatedBin += char;
                     }
                 }
-                // Kung walang 'x' at kulang ang haba, dagdagan ng random numbers para mabuo ang 16 digits
                 while (generatedBin.length < 16) {
                     generatedBin += Math.floor(Math.random() * 10);
                 }
 
-                // Buwan
                 let generatedMonth = "";
                 for (let char of monthPattern) {
                     if (char.toLowerCase() === 'x') {
@@ -393,7 +390,6 @@
                     generatedMonth = String(Math.floor(1 + Math.random() * 12)).padStart(2, '0');
                 }
 
-                // Taon
                 let generatedYear = "";
                 for (let char of yearPattern) {
                     if (char.toLowerCase() === 'x') {
@@ -404,7 +400,6 @@
                 }
                 if (generatedYear === "") generatedYear = "28";
 
-                // CVV
                 let generatedCvv = "";
                 for (let char of cvvPattern) {
                     if (char.toLowerCase() === 'x') {
