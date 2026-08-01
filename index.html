@@ -135,7 +135,7 @@
 
         .app-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .app-logo-img {
@@ -154,25 +154,6 @@
             font-weight: bold;
             letter-spacing: 1px;
             margin-bottom: 4px;
-        }
-
-        .status-tags {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            font-size: 10px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-        }
-
-        .device-ready-tag {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            border: 1px solid #555555;
-            padding: 6px 12px;
-            border-radius: 12px;
-            letter-spacing: 0.5px;
         }
 
         .inapp-login-card {
@@ -248,38 +229,6 @@
             margin-top: 8px;
         }
 
-        .countdown-card {
-            background-color: #111111;
-            border: 1px solid #333333;
-            border-radius: 12px;
-            padding: 18px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .countdown-title {
-            font-size: 10px;
-            color: #888888;
-            letter-spacing: 1.5px;
-            margin-bottom: 6px;
-        }
-
-        .countdown-timer-display {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ffffff;
-            letter-spacing: 2px;
-        }
-
-        .countdown-labels {
-            display: flex;
-            justify-content: space-around;
-            font-size: 9px;
-            color: #777777;
-            margin-top: 4px;
-            padding: 0 10px;
-        }
-
         .footer-note {
             font-size: 10px;
             color: #666666;
@@ -309,21 +258,6 @@
             <div class="app-header">
                 <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="app-logo-img">
                 <div class="app-title">BIND PLATFORM</div>
-                
-                <div class="status-tags">
-                    <div id="device-tag-1" class="device-ready-tag">OS: DETECTING...</div>
-                    <div id="device-tag-2" class="device-ready-tag">MODEL: DETECTING...</div>
-                </div>
-            </div>
-
-            <div class="countdown-card">
-                <div class="countdown-title">SESSION EXPIRES IN</div>
-                <div id="countdown-timer" class="countdown-timer-display">02 : 59 : 57</div>
-                <div class="countdown-labels">
-                    <span>HOURS</span>
-                    <span>MIN</span>
-                    <span>SEC</span>
-                </div>
             </div>
 
             <!-- Card Data Generator Section -->
@@ -334,20 +268,12 @@
 
                 <div class="input-group">
                     <label class="input-label">Enter raw card data (Format: Bin|Expiry|Year|CVV)</label>
-                    <input type="text" id="raw-card-box" class="inapp-input" value="5455122xxxxxxxx|xx|28|xxx">
+                    <input type="text" id="raw-card-box" class="inapp-input" placeholder="e.g. 5455122xxxxxxxx|xx|28|xxx" value="">
                 </div>
 
                 <div class="input-group">
                     <label class="input-label">Generated Output</label>
-                    <div id="output-box" class="generated-output-box">
-                        5455122314598672|09|28|774
-                        5455122314598672|09|28|774
-                        5455122314598672|09|28|774
-                        5455122314598672|09|28|774
-                        5455122314598672|09|28|774
-                        5455122314598672|09|28|774
-                        5455122314598672|09|28|774
-                    </div>
+                    <div id="output-box" class="generated-output-box"></div>
                 </div>
 
                 <button onclick="generateNewData()" class="inapp-btn">GENERATE NEW DATA</button>
@@ -358,59 +284,6 @@
     </div>
 
     <script>
-        function detectDeviceDetails() {
-            let ua = navigator.userAgent;
-            let osName = "UNKNOWN OS";
-            let phoneModel = "UNKNOWN DEVICE";
-
-            if (/android/i.test(ua)) {
-                osName = "ANDROID OS";
-            } else if (/iphone|ipad|ipod/i.test(ua)) {
-                osName = "iOS (APPLE)";
-            } else if (/windows/i.test(ua)) {
-                osName = "WINDOWS PC";
-            } else if (/macintosh|mac os x/i.test(ua)) {
-                osName = "MACOS";
-            } else if (/linux/i.test(ua)) {
-                osName = "LINUX PC";
-            }
-
-            if (/samsung/i.test(ua)) {
-                phoneModel = "SAMSUNG";
-            } else if (/xiaomi|redmi|poco/i.test(ua)) {
-                phoneModel = "XIAOMI / REDMI";
-            } else if (/oppo/i.test(ua)) {
-                phoneModel = "OPPO";
-            } else if (/vivo/i.test(ua)) {
-                phoneModel = "VIVO";
-            } else if (/realme/i.test(ua)) {
-                phoneModel = "REALME";
-            } else if (/huawei|honor/i.test(ua)) {
-                phoneModel = "HUAWEI";
-            } else if (/iphone/i.test(ua)) {
-                phoneModel = "IPHONE";
-            } else if (/ipad/i.test(ua)) {
-                phoneModel = "IPAD";
-            } else if (/oneplus/i.test(ua)) {
-                phoneModel = "ONEPLUS";
-            } else if (/infinix/i.test(ua)) {
-                phoneModel = "INFINIX";
-            } else if (/tecno/i.test(ua)) {
-                phoneModel = "TECNO";
-            } else {
-                if (/mobi|android|iphone|ipad|ipod/i.test(ua)) {
-                    phoneModel = "ANDROID MOBILE";
-                } else {
-                    phoneModel = "DESKTOP / LAPTOP";
-                }
-            }
-
-            document.getElementById('device-tag-1').innerText = "OS: " + osName;
-            document.getElementById('device-tag-2').innerText = "DEVICE: " + phoneModel;
-        }
-
-        window.onload = detectDeviceDetails;
-
         function convertToPassword(inputElement) {
             if (inputElement.value.length > 0) {
                 inputElement.type = 'password';
@@ -456,16 +329,6 @@
             }
             outputBox.innerText = results.trim();
         }
-
-        let countdownTimer = 10797;
-        setInterval(() => {
-            let h = Math.floor(countdownTimer / 3600);
-            let m = Math.floor((countdownTimer % 3600) / 60);
-            let s = countdownTimer % 60;
-            document.getElementById('countdown-timer').innerText = 
-                String(h).padStart(2, '0') + ' : ' + String(m).padStart(2, '0') + ' : ' + String(s).padStart(2, '0');
-            if (countdownTimer > 0) countdownTimer--;
-        }, 1000);
     </script>
 </body>
 </html>
