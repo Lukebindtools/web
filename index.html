@@ -198,7 +198,7 @@
 
         .generated-output-box {
             width: 100%;
-            min-height: 120px;
+            min-height: 110px;
             background-color: #000000;
             border: 1px solid #333;
             border-radius: 8px;
@@ -210,7 +210,7 @@
             line-height: 1.5;
             white-space: pre-line;
             overflow-y: auto;
-            max-height: 150px;
+            max-height: 140px;
         }
 
         .inapp-btn {
@@ -229,6 +229,27 @@
             margin-top: 6px;
         }
 
+        .copy-btn {
+            width: 100%;
+            background: #333333;
+            color: #ffffff;
+            border: 1px solid #555;
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: inherit;
+            margin-top: 6px;
+        }
+
+        .copy-btn:hover {
+            background: #444444;
+            border-color: #fff;
+        }
+
         .footer-note {
             font-size: 10px;
             color: #666666;
@@ -240,7 +261,7 @@
 </head>
 <body>
 
-    <!-- Intro Password Lock Overlay (Naibalik na ang input box) -->
+    <!-- Intro Password Lock Overlay -->
     <div id="login-overlay">
         <div id="password-form-box" class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
@@ -268,7 +289,7 @@
 
                 <div class="input-group">
                     <label class="input-label">Format: Bin|Expiry|Year|CVV</label>
-                    <input type="text" id="raw-card-box" class="inapp-input" value="">
+                    <input type="text" id="raw-card-box" class="inapp-input" value="545512|xx|xxxx|xxx">
                 </div>
 
                 <div class="input-group">
@@ -282,6 +303,7 @@
                 </div>
 
                 <button onclick="generateNewData()" class="inapp-btn">GENERATE NEW DATA</button>
+                <button onclick="copyOutputData()" class="copy-btn">COPY OUTPUT</button>
             </div>
         </div>
 
@@ -335,16 +357,82 @@
             if (count > 100000) count = 100000;
             if (count < 1) count = 1;
 
+            let parts = rawInput.split('|');
+            let binPattern = parts[0] || "545512";
+            let monthPattern = parts[1] || "xx";
+            let yearPattern = parts[2] || "28";
+            let cvvPattern = parts[3] || "xxx";
+
             let results = [];
-            let baseBin = rawInput.split('|')[0] || "5455122";
             
             for (let i = 0; i < count; i++) {
-                let randomCardNum = baseBin + Math.floor(100000000 + Math.random() * 900000000);
-                let randomMonth = String(Math.floor(1 + Math.random() * 12)).padStart(2, '0');
-                let randomCvv = String(Math.floor(100 + Math.random() * 900));
-                results.push(randomCardNum + "|" + randomMonth + "|28|" + randomCvv);
+                // Palitan ang mga 'x' o random digits sa BIN
+                let generatedBin = "";
+                for (let char of binPattern) {
+                    if (char.toLowerCase() === 'x') {
+                        generatedBin += Math.floor(Math.random() * 10);
+                    } else {
+                        generatedBin += char;
+                    }
+                }
+                // Kung walang 'x' at kulang ang haba, dagdagan ng random numbers para mabuo ang 16 digits
+                while (generatedBin.length < 16) {
+                    generatedBin += Math.floor(Math.random() * 10);
+                }
+
+                // Buwan
+                let generatedMonth = "";
+                for (let char of monthPattern) {
+                    if (char.toLowerCase() === 'x') {
+                        generatedMonth += Math.floor(Math.random() * 10);
+                    } else {
+                        generatedMonth += char;
+                    }
+                }
+                if (generatedMonth === "" || generatedMonth.includes('x')) {
+                    generatedMonth = String(Math.floor(1 + Math.random() * 12)).padStart(2, '0');
+                }
+
+                // Taon
+                let generatedYear = "";
+                for (let char of yearPattern) {
+                    if (char.toLowerCase() === 'x') {
+                        generatedYear += Math.floor(Math.random() * 10);
+                    } else {
+                        generatedYear += char;
+                    }
+                }
+                if (generatedYear === "") generatedYear = "28";
+
+                // CVV
+                let generatedCvv = "";
+                for (let char of cvvPattern) {
+                    if (char.toLowerCase() === 'x') {
+                        generatedCvv += Math.floor(Math.random() * 10);
+                    } else {
+                        generatedCvv += char;
+                    }
+                }
+                if (generatedCvv === "" || generatedCvv.includes('x')) {
+                    generatedCvv = String(Math.floor(100 + Math.random() * 900));
+                }
+
+                results.push(generatedBin + "|" + generatedMonth + "|" + generatedYear + "|" + generatedCvv);
             }
             outputBox.innerText = results.join('\n');
+        }
+
+        function copyOutputData() {
+            let outputText = document.getElementById('output-box').innerText;
+            if (!outputText) {
+                alert("Walang laman na i-copy!");
+                return;
+            }
+            navigator.clipboard.writeText(outputText).then(() => {
+                alert("Nai-copy na ang lahat ng generated data!");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
         }
     </script>
 </body>
