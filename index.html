@@ -240,7 +240,6 @@
 </head>
 <body>
 
-    <!-- Intro Password Lock Overlay -->
     <div id="login-overlay">
         <div id="password-form-box" class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
@@ -252,7 +251,6 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div id="main-content" class="phone-frame blurred">
         <div>
             <div class="app-header">
@@ -260,14 +258,13 @@
                 <div class="app-title">BIND PLATFORM</div>
             </div>
 
-            <!-- Card Data Generator Section -->
             <div class="inapp-login-card">
                 <div style="text-align: center; font-size: 13px; font-weight: bold; letter-spacing: 1px; margin-bottom: 16px;">
                     CARD DATA GENERATOR
                 </div>
 
                 <div class="input-group">
-                    <label class="input-label">Enter raw card data (Format: Bin|Expiry|Year|CVV)</label>
+                    <label class="input-label">Format: Bin|Expiry|Year|CVV</label>
                     <input type="text" id="raw-card-box" class="inapp-input" value="">
                 </div>
 
@@ -317,9 +314,17 @@
         });
 
         function generateNewData() {
+            let rawInput = document.getElementById('raw-card-box').value.trim();
             let outputBox = document.getElementById('output-box');
+
+            // Kung blanko ang input, walang gagawin o lilinisin ang output
+            if (rawInput === "") {
+                outputBox.innerText = "";
+                return;
+            }
+
             let results = "";
-            let baseBin = "5455122";
+            let baseBin = rawInput.split('|')[0] || "5455122";
             
             for (let i = 0; i < 7; i++) {
                 let randomCardNum = baseBin + Math.floor(100000000 + Math.random() * 900000000);
