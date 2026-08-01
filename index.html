@@ -346,11 +346,17 @@
 
         function generateNewData() {
             let rawInput = document.getElementById('raw-card-box').value.trim();
-            let quantityInput = document.getElementById('quantity-box').value;
+            let quantityInput = document.getElementById('quantity-box').value.trim();
             let outputBox = document.getElementById('output-box');
 
             if (rawInput === "") {
                 outputBox.innerText = "";
+                return;
+            }
+
+            // Check if quantity is empty
+            if (quantityInput === "") {
+                outputBox.innerText = "[!] PLEASE ENTER QUANTITY";
                 return;
             }
 
@@ -368,9 +374,12 @@
                 return;
             }
 
-            let count = parseInt(quantityInput) || 7;
+            let count = parseInt(quantityInput, 10);
+            if (isNaN(count) || count < 1) {
+                outputBox.innerText = "[!] PLEASE ENTER QUANTITY";
+                return;
+            }
             if (count > 100000) count = 100000;
-            if (count < 1) count = 1;
 
             let monthPattern = parts[1] || "xx";
             let yearPattern = parts[2] || "28";
@@ -391,7 +400,6 @@
                     generatedBin += Math.floor(Math.random() * 10);
                 }
 
-                // Strict Expiry Month Generation (01 to 12 only)
                 let generatedMonth = "";
                 for (let char of monthPattern) {
                     if (char.toLowerCase() === 'x') {
@@ -437,7 +445,7 @@
 
         function copyOutputData() {
             let outputText = document.getElementById('output-box').innerText;
-            if (!outputText || outputText.includes("[!] INVALID BIN")) {
+            if (!outputText || outputText.includes("[!] INVALID BIN") || outputText.includes("[!] PLEASE ENTER QUANTITY")) {
                 return;
             }
             navigator.clipboard.writeText(outputText).catch(err => {
