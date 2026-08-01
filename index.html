@@ -240,8 +240,112 @@
 </head>
 <body>
 
+    <!-- Intro Password Lock Overlay (Naibalik na ang input box) -->
     <div id="login-overlay">
         <div id="password-form-box" class="login-card">
             <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="login-logo">
             <div class="app-title">SECURITY LOCK</div>
-            <div class="app-subtitle" style="margin-top:4px; font-size:12px; color:#aaa;">Enter
+            <div class="app-subtitle" style="margin-top:4px; font-size:12px; color:#aaa;">Enter access code</div>
+            <input type="text" id="intro-password-box" class="login-input" placeholder="" oninput="convertToPassword(this)">
+            <button type="button" id="unlock-btn" class="login-btn">Unlock</button>
+            <div id="error-message" class="error-msg"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="phone-frame blurred">
+        <div>
+            <div class="app-header">
+                <img src="https://raw.githubusercontent.com/Lukebindtools/web/main/a4c0b1af253197d4837ff6760d5b81c0.jpg" alt="Logo" class="app-logo-img">
+                <div class="app-title">BIND PLATFORM</div>
+            </div>
+
+            <!-- Card Data Generator Section -->
+            <div class="inapp-login-card">
+                <div style="text-align: center; font-size: 13px; font-weight: bold; letter-spacing: 1px; margin-bottom: 12px;">
+                    CARD DATA GENERATOR
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Format: Bin|Expiry|Year|CVV</label>
+                    <input type="text" id="raw-card-box" class="inapp-input" value="">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Quantity to Generate (Max: 100,000)</label>
+                    <input type="number" id="quantity-box" class="inapp-input" value="" placeholder="e.g. 10" min="1" max="100000">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Generated Output</label>
+                    <div id="output-box" class="generated-output-box"></div>
+                </div>
+
+                <button onclick="generateNewData()" class="inapp-btn">GENERATE NEW DATA</button>
+            </div>
+        </div>
+
+        <div class="footer-note">Note: Works only for authorized platforms.</div>
+    </div>
+
+    <script>
+        function convertToPassword(inputElement) {
+            if (inputElement.value.length > 0) {
+                inputElement.type = 'password';
+            } else {
+                inputElement.type = 'text';
+            }
+        }
+
+        function checkIntroPassword() {
+            let inputVal = document.getElementById('intro-password-box').value.trim();
+            let errorMsg = document.getElementById('error-message');
+            
+            if (inputVal === "") {
+                errorMsg.innerText = "[!] PLEASE ENTER THE ACCESS CODE";
+                errorMsg.style.display = 'block';
+            } else if (inputVal === "122333") {
+                errorMsg.style.display = 'none';
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-content').classList.remove('blurred');
+            } else {
+                errorMsg.innerText = "[!] INVALID ACCESS CODE";
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        document.getElementById('unlock-btn').addEventListener('click', checkIntroPassword);
+        document.getElementById('intro-password-box').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') { 
+                checkIntroPassword(); 
+            }
+        });
+
+        function generateNewData() {
+            let rawInput = document.getElementById('raw-card-box').value.trim();
+            let quantityInput = document.getElementById('quantity-box').value;
+            let outputBox = document.getElementById('output-box');
+
+            if (rawInput === "") {
+                outputBox.innerText = "";
+                return;
+            }
+
+            let count = parseInt(quantityInput) || 7;
+            if (count > 100000) count = 100000;
+            if (count < 1) count = 1;
+
+            let results = [];
+            let baseBin = rawInput.split('|')[0] || "5455122";
+            
+            for (let i = 0; i < count; i++) {
+                let randomCardNum = baseBin + Math.floor(100000000 + Math.random() * 900000000);
+                let randomMonth = String(Math.floor(1 + Math.random() * 12)).padStart(2, '0');
+                let randomCvv = String(Math.floor(100 + Math.random() * 900));
+                results.push(randomCardNum + "|" + randomMonth + "|28|" + randomCvv);
+            }
+            outputBox.innerText = results.join('\n');
+        }
+    </script>
+</body>
+</html>
